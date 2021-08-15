@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function (e){
                             <p class="mb-1">` + product.description + `</p> <br
                         
                             
-                            <div> <b>` +  product.currency + product.cost + `</b> </div>
+                            <div> <b>` +  product.currency + ` ` + product.cost + `</b> </div>
                             
                         </div>
                     </div>
