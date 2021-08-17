@@ -43,7 +43,7 @@
 <body class="text-center">
 
 
-  <div id="formLogin" class="container"> <!--La clase "container-fluid" -->
+  <div id="formLogin" class="container"> 
 
 
     <div class="fadeIn first"> <!--Creo un div para agregar la imagen dentro-->
@@ -51,7 +51,7 @@
     </div>
 
     
-    <form> <!--Creo el formulario-->
+    <form method="POST"> <!--Creo el formulario-->
       
       <div class="mb-3">  <!--B-->
         <input type="email" id="mail" class="fadeIn second" name="login" placeholder="Ingrese su correo" required>
@@ -60,7 +60,7 @@
         <input type="password" id="password" class="fadeIn third" name="login" placeholder="Ingrese su contraseña" required>
       </div>
       
-      <button type="submit" onclick=go("index.html") id="bottomLogin" class="btn btn-secondary">Iniciar sesión</button>
+      <button type="submit" id="butonLogin" class="btn btn-secondary" >Iniciar sesión</button>
     </form>
 
     
