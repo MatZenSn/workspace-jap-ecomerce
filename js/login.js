@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 
       var  mail = document.getElementById("mail")//Valor en el campo de Correo  del formulario
        var password = document.getElementById("password")//Valor en el campo contraseña del formulario
-    document.getElementById("butonLogin").addEventListener("click",function(){
-        if(mail.value != "" || password.value != ""){ //Si los campos son diferentes de nada ejecuta location.replace, que redirije sin permitir volver atras con el boton de back del navegador.
+    document.getElementById("buttonLogin").addEventListener("click",function(){
+        if(mail.value != "" && password.value != ""){ //Si los campos son diferentes de nada ejecuta location.replace, que redirije sin permitir volver atras con el boton de back del navegador.
         location.replace("inicio.html")}
     })
 
