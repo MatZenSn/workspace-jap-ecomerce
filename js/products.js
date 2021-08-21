@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function (e){
 
     
     //creo funcion para mostrar los producos
-    function showProductsList(array){ 
+    function showProductsList(){ 
 
 
         for(let i = 0; i < currentProductsArray.length; i++){ // Utilizo un for para recorrer el array recibido
