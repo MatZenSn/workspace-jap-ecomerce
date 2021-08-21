@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function (e){
         getJSONData("https://japdevdep.github.io/ecommerce-api/product/all.json").then(function(result){ // Utilizo getJSONData creada en init.js
             if (result.status === "ok"){
                 currentProductsArray = result.data
-                showProductsList(result);} //Llamo la funcion creada mas arriba
+                showProductsList();} //Llamo la funcion creada mas arriba
             })
 
 })
