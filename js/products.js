@@ -35,10 +35,10 @@ function sortProducts(criteria, array){
     return result;
 }
 
-function showProductsList(){ //creo funcion para mostrar los producos
+function showProductsList(){ 
 
     let htmlContentToAppend = "";
-    for(let i = 0; i < currentProductsArray.length; i++){ // Utilizo un for para recorrer el array recibido
+    for(let i = 0; i < currentProductsArray.length; i++){ 
         let product = currentProductsArray[i];
 
         if (((minCost == undefined) || (minCost != undefined && parseInt(product.cost) >= minCost)) &&
@@ -83,7 +83,7 @@ function sortAndShowProducts(sortCriteria, productsArray){
 
 
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(PRODUCTS_URL).then(function(resultObj){ // Utilizo getJSONData creada en init.js
+    getJSONData(PRODUCTS_URL).then(function(resultObj){ 
         if (resultObj.status === "ok"){
             sortAndShowProducts(ORDER_ASC_BY_COST, resultObj.data);
         } 
@@ -110,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function(e){
         });
 
         document.getElementById("rangeFilterCost").addEventListener("click", function(){
-            //Obtengo el mínimo y máximo de los intervalos para filtrar por precio
         
             minCost = document.getElementById("rangeFilterCostMin").value;
             maxCost = document.getElementById("rangeFilterCostMax").value;
