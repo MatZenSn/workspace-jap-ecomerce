@@ -1,10 +1,11 @@
-const ORDER_ASC_BY_COST = "AZ";
-const ORDER_DESC_BY_COST = "ZA";
+const ORDER_ASC_BY_COST = "Min-Max";
+const ORDER_DESC_BY_COST = "Max-Min";
 var currentSortCriteria = undefined;
 const ORDER_BY_PROD_COUNT = "Cant.";
 var minCost = undefined;
 var maxCost = undefined;
 var currentProductsArray = [];
+var searchValue = undefined;
 
 function sortProducts(criteria, array){
     let result = [];
@@ -41,7 +42,8 @@ function showProductsList(){
     for(let i = 0; i < currentProductsArray.length; i++){ 
         let product = currentProductsArray[i];
 
-        if (((minCost == undefined) || (minCost != undefined && parseInt(product.cost) >= minCost)) &&
+        if((searchValue == undefined) || ((searchValue != undefined) && (product.name.includes(searchValue)))){
+            if (((minCost == undefined) || (minCost != undefined && parseInt(product.cost) >= minCost)) &&
             ((maxCost == undefined) || (maxCost != undefined && parseInt(product.cost) <= maxCost))){
 
             htmlContentToAppend += `
@@ -61,6 +63,7 @@ function showProductsList(){
                 </div>
             </a>
             `
+        }
         }
         document.getElementById("product-list-container").innerHTML = htmlContentToAppend;
     }
@@ -102,9 +105,11 @@ document.addEventListener("DOMContentLoaded", function(e){
         document.getElementById("clearRangeFilter").addEventListener("click", function(){
             document.getElementById("rangeFilterCostMin").value = "";
             document.getElementById("rangeFilterCostMax").value = "";
+            document.getElementById("search").value ="";
 
             minCost = undefined;
             maxCost = undefined;
+            searchValue = undefined;
 
             showProductsList();
         });
@@ -127,7 +132,22 @@ document.addEventListener("DOMContentLoaded", function(e){
             else{
                 maxCost = undefined;
             }
-    
+            
             showProductsList();
         });
+
+        document.getElementById("search").addEventListener("keyup", function() {
+            searchValue = document.getElementById("search").value
+            if((searchValue != undefined) && (searchValue != "")) {
+                showProductsList();
+            }
+            else{
+                searchValue = undefined;
+                showProductsList();
+            }
+
+
+        });
+
+
 });
