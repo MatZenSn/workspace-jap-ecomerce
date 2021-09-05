@@ -10,8 +10,9 @@ document.addEventListener("DOMContentLoaded", function(e){
 
        localStorage.setItem("user", user);
       
-        if(user != "" && password != ""){ //Si los campos son diferentes de nada ejecuta location.replace, que redirije sin permitir volver atras con el boton de back del navegador.
-        location.replace("inicio.html")}
+        if(user != "" && password != ""){
+            localStorage.setItem("user", user); //Si los campos son diferentes de nada ejecuta location.replace, que redirije sin permitir volver atras con el boton de back del navegador.
+            location.replace("inicio.html")}
         else alert("Debes completar ambos campos.")
         
     })
