@@ -42,7 +42,7 @@ function showProductsList(){
     for(let i = 0; i < currentProductsArray.length; i++){ 
         let product = currentProductsArray[i];
 
-        if((searchValue == undefined) || ((searchValue != undefined) && (product.name.includes(searchValue)))){
+        if((searchValue == undefined) || ((searchValue != undefined) && (product.name.toLowerCase().includes(searchValue)))){
             if (((minCost == undefined) || (minCost != undefined && parseInt(product.cost) >= minCost)) &&
             ((maxCost == undefined) || (maxCost != undefined && parseInt(product.cost) <= maxCost))){
 
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         });
 
         document.getElementById("search").addEventListener("keyup", function() {
-            searchValue = document.getElementById("search").value
+            searchValue = document.getElementById("search").value.toLowerCase()
             if((searchValue != undefined) && (searchValue != "")) {
                 showProductsList();
             }
