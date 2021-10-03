@@ -39,15 +39,50 @@ var getJSONData = function(url){
         return result;
     });
 }
+//Funcion que agrega el menu desplegable al navBar. Si no hay un item user en el localStorage, crea un enlace a la pantalla del login.
+function addNameDropDown(){
+  let htmlContentToAppend = "";
 
-function addName(){
-  document.getElementById("usuario").innerHTML += localStorage.getItem("user")
+  if(localStorage.getItem("user") !== null){
+    
+      htmlContentToAppend += `<div class="dropdown">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    `+localStorage.getItem("user")+`
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="cart.html">Mi carrito</a>
+      <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" id="logOut">Cerrar Sesión</a>
+    </div>
+  </div>`
+  }
+  else if(localStorage.getItem("user") == null){
+    {
+      htmlContentToAppend += `<a class="py-2 d-none d-md-inline-block" href="index.html">Iniciar sesión</a>`}
+    }
+  
+
+          
+
+                      
+  document.getElementById("addNameDropDown").innerHTML += htmlContentToAppend;
 }
+//Funcion que remueve el item y redirije a pantalla de login.
+function logOut(){
+  localStorage.removeItem("user");
+  window.location.replace("index.html");
+}
+
 
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-  addName();
+  addNameDropDown();
+
+  document.getElementById("logOut").addEventListener("click", function(){
+    logOut();
+  })
 });
