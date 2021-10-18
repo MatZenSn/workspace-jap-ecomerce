@@ -11,7 +11,7 @@ function showImagesGallery(array){
     let htmlContentToAppend ="";
     
     for(let i = 0; i < (array.length); i++){
-        const listaDeImagenes = product.images[i];
+        let listaDeImagenes = product.images[i];
 
         htmlContentToAppend = `<div class="carousel-item"><img src="${listaDeImagenes}" class="d-block w-100" alt="Imagen del producto"></div>`
         

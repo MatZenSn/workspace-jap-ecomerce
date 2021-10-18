@@ -13,31 +13,7 @@
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <style>
-    html, body{
-      height: 100%;
-    }
-
-    body {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-      align-items: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #f8f9fa; /*Utilizo el color exacto del fondo de la img login */
-    }
-
-    .signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: auto;
-    }
-    
-    
-    
-  </style>
+  <link href="css/login.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
@@ -45,22 +21,22 @@
 
   <div id="formLogin" class="container"> 
 
-    <div> 
+    <div class="backimg"> 
       <img src="img/login.png" id="icon" alt="User Icon" />
-    </div>
+    </div> 
 
     
-    <form> 
-      <div class="mb-3"> 
-        <input class="col-sm-2 col-form-label col-form-label-sm" type="text" id="user" size="30"  name="login" placeholder="Ingrese su correo" required>
-      </div>
-      <div class="mb-3">
-        <input class="col-sm-2 col-form-label col-form-label-sm" type="password" id="password" size="30"  name="login" placeholder="Ingrese su contraseña" required>
-      </div>
+    <form class="box"> 
+       
+        <input  type="text" id="user"   name="login" placeholder="Ingrese su correo" required>
       
-      <button type="button" id="buttonLogin" class="btn btn-dark" >Iniciar sesión</button>
+      
+        <input  type="password" id="password"   name="login" placeholder="Ingrese su contraseña" required>
+      
+      
+      <input type="submit" id="buttonLogin"  value="Iniciar Sesión" onclick="loguear()"> 
     </form>
-  </div>
+ 
   
  
   <script src="js/login.js"></script>

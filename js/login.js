@@ -3,7 +3,9 @@
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){ 
 
-    document.getElementById("buttonLogin").addEventListener("click",function(){
+    document.getElementById("buttonLogin").addEventListener("click",function(e){
+        event.preventDefault()
+        
         
       var  user = document.getElementById("user").value
       var password = document.getElementById("password").value
@@ -16,6 +18,4 @@ document.addEventListener("DOMContentLoaded", function(e){
         else alert("Debes completar ambos campos.")
         
     })
-
-    
-});
+})
