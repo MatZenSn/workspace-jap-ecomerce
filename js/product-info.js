@@ -122,7 +122,12 @@ document.addEventListener("DOMContentLoaded", function(e){
            
             showImagesGallery(product.images);
         }
-    });
+    }).then( getJSONData(PRODUCTS_URL).then(function(resultArreglo){ 
+        if (resultArreglo.status === "ok"){
+            prueba = resultArreglo.data
+            showRelatedProducts()
+        } 
+    }));
 
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(result){
         if (result.status === "ok"){
@@ -137,12 +142,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         addNewComment();
     })
 
-    getJSONData(PRODUCTS_URL).then(function(resultArreglo){ 
-        if (resultArreglo.status === "ok"){
-            prueba = resultArreglo.data
-            showRelatedProducts()
-        } 
-    });
+   
 
 });
 

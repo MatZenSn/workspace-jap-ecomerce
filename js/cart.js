@@ -67,7 +67,7 @@ function showCartProducts(array) {//for que recorre el array que nos viene del j
   let append = "";
   for (let i = 0; i < (array.length); i++) {
     let art = array[i];
-    if (art.currency == "UYU") { //Si viene en PESOS,(asumiendo que solo se envia informacion en dolares y pesos) lo convierte a DOLARES. EN EL FUTURO AGREGAR QUE SE PUEDA SELECCIONAR A GUSTO!
+    if (art.currency == "UYU") { //Si viene en PESOS,(asumiendo que solo se envia informacion en dolares y pesos) lo convierte a DOLARES. EN EL FUTURO AGREGARÉ QUE SE PUEDA SELECCIONAR A GUSTO!
       art.unitCost = (art.unitCost / 40.00)
       art.currency = "USD"
 
@@ -107,7 +107,9 @@ function showCartProducts(array) {//for que recorre el array que nos viene del j
                 </div>
                 <div class="cart_item_quantity cart_info_col">
                   <div class="cart_item_title">${art.name}</div>
-                  <input class="cart_item_text productCant form-control" min="1" value="${art.count}" type="number" data-unitcost="${art.unitCost}" data-idsubtotal="subtotalProducto${i}"/>
+                  <input 
+                  
+                  class="cart_item_text productCant form-control" min="1" value="${art.count}" type="number" data-unitcost="${art.unitCost}" data-idsubtotal="subtotalProducto${i}"/>
                 </div>
                 <div class="cart_item_price cart_info_col">
                   <div class="cart_item_title">Precio por unidad</div>
