@@ -31,7 +31,7 @@
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/dropzone.css" rel="stylesheet">
   <link href="css/cart.css" rel="stylesheet">
-  
+
 </head>
 
 <body>
@@ -63,13 +63,16 @@
                   <h2>Datos de envio</h2>
                   <div class="container infoEnvio">
                     <div>
-                      <p>Direccíon: <input type="text" class="form-control col-md-8" placeholder="Direccion de envio">
+                      <p>Direccíon: <input type="text" class="form-control col-md-8" id="direccion"
+                          placeholder="Direccion de envio">
                       </p>
                       <div class="row" style="margin-left: 2px;">
-                        <p>Ciudad: <input type="text" class="form-control col-md-6" placeholder="Ciudad"></p>
-                        <p>Codigo postal:<input type="text" class="form-control col-md-8" placeholder="Codigo Postal">
+                        <p>Ciudad: <input type="text" class="form-control col-md-6" placeholder="Ciudad" id="ciudad">
                         </p>
-                        <p>País: <select name="pais" class="form-control">
+                        <p>Codigo postal:<input type="text" class="form-control col-md-8" id="codigoPostal"
+                            placeholder="Codigo Postal">
+                        </p>
+                        <p>País: <select name="pais" class="form-control" id="pais">
                             <option value="00" selected disabled>Seleccione su país</option>
                             <option value="AF">Afganistán</option>
                             <option value="AL">Albania</option>
@@ -322,33 +325,30 @@
                 </form>
               </div>
               <div>
-                <h2>Ticket de compra</h2>
+                <h2>Resumen de compra</h2>
                 <div class="card" style="width: 18rem;">
 
                   <div class="card-body">
                     <ul>
                       <li>
-                        <div class="row">
-                          <p>Subtotal: USD </p>
+                        <div>
                           <p id="subtotal"></p>
                         </div>
                       </li>
                       <li>
-                        <div class="row">
-                          <p>Coste de envío: USD</p>
+                        <div>
                           <p id="costeEnvío"></p>
                         </div>
                       </li>
                       <li>
-                        <div class="row">
-                          <p>Total: USD </p>
+                        <div>
                           <p id="precioTotal"></p>
                         </div>
                       </li>
-                      <button type="button" class="btn btn-secondary">Comprar</button>
+                      <button type="button" class="btn btn-secondary" onclick="validateShippingData()">
+                        Seleccionar metodo de pago</button>
                     </ul>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -357,6 +357,84 @@
       </div>
     </div>
 
+
+    <!-- Modal metodo de pago-->
+    <div class="modal fade" id="methodPaymentModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Seleccione un metodo de pago</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body row">
+            <div class="col-auto my-1">
+              <label class="mr-sm-2" for="inlineFormCustomSelect">Metodo de pago</label>
+              <select class="custom-select mr-sm-2" id="methodPayment" onchange="selectPaymentMethod()">
+                <option disabled selected>Seleccione un metodo de pago</option>
+                <option value="card">Tarjeta de credito</option>
+                <option value="transfer">Transferencia Bancaria</option>
+
+              </select>
+              <div id="methodPaymentSelected">
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+              <button type="button" id="finishCompra" class="btn btn-success" onclick="validatePaymentData()">Realizar Compra</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal eliminar producto? -->
+    <div class="modal fade" id="eliminarProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Eliminar producto</h5>
+            <button type="button" class="close" onclick="noRemoverItem()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ¿Deseas eliminar este producto del carrito?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="noRemoverItem()">Cancelar</button>
+            <button type="button" id="removeButton" onclick="removerItem()" class="btn btn-danger">Eliminar
+              proucto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal compra finalizada-->
+    <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true" style="background-color: white !important;">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Felicitaciones!!</h5>
+          </div>
+          <div class="modal-body">
+            <p>Se ha procesado su pago con exito y su compra ha sido ingresada.</p>
+            <p>Desde E-Mercado agradecemos su confianza y esperamos que disfrute de su nuevo producto.</p>
+            <p id="tiempoEnvio"></p>
+            <p id="numeroDeOrden"></p>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-success" onclick=location.replace("inicio.html")>Volver al inicio</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="spinner-wrapper">
       <div class="lds-ring">
