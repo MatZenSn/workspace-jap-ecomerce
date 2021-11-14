@@ -79,7 +79,7 @@ function showCartProducts(array) {//for que recorre el array que nos viene del j
 function multiplicarPrecio() {//Multiplica cantidad por precio unitario
   for (let listaElement of listaImputs) {
     listaElement.addEventListener("change", (event) => {//evento change que está atento a cualquier cambio en esos inputs
-      if (event.target.value <= 0  ) {//Si la cantidad de productos llega a 0 lanza un modal para preguntar si se quiere eliminar el producto del carrito
+      if (event.target.value <= 0) {//Si la cantidad de productos llega a 0 lanza un modal para preguntar si se quiere eliminar el producto del carrito
         $('#eliminarProduct').modal('show');
         document.getElementById("removeButton").setAttribute("data-iProduct", event.target.dataset.indice);//Setea el indice del produto que lanza el modal para poder identificar el producto
       }
@@ -92,7 +92,7 @@ function multiplicarPrecio() {//Multiplica cantidad por precio unitario
         calcularSubtotal();
         calcularPrecioDeEnvío();
         calcularTotal();
-      } 
+      }
     })
 
   }
@@ -242,29 +242,35 @@ function validateShippingData() {//Validar los datos correspondientes al metodo 
   ciudad.classList.remove("is-invalid");
   codigoPostal.classList.remove("is-invalid");
   pais.classList.remove("is-invalid");
+  if (cartProducts.length > 0) {//Primero valida que hayan productos en el carrito
+    if (direccion.value !== "" && ciudad.value !== "" && codigoPostal.value !== "" && pais.value !== "00" && cartProducts.length > 0) {//Si ningun campo se encuentra vacio, lanza el modal
+      $('#methodPaymentModal').modal('show');
+    }
 
-  if (direccion.value !== "" && ciudad.value !== "" && codigoPostal.value !== "" && pais.value !== "00") {//Si ningun campo se encuentra vacio, lanza el modal
-    $('#methodPaymentModal').modal('show');
+    else {//Si un campo se encuentra vacio, pregunta cúal es y le agrega la clase "is-invalid" de bootstrap
+      if (direccion.value == "") { direccion.classList.add("is-invalid"); }
+
+
+      if (ciudad.value == "") {
+        ciudad.classList.add("is-invalid");
+
+      }
+      if (codigoPostal.value == "") {
+        codigoPostal.classList.add("is-invalid");
+
+      }
+      if (pais.value == "00") {
+        pais.classList.add("is-invalid");
+
+      }
+
+
+    }
+  }
+  else {//Si no hay productos en el carrito, lanza un modal a modo de aviso
+    $('#carritoVaccio').modal('show')
   }
 
-  else {//Si un campo se encuentra vacio, pregunta cúal es y le agrega la clase "is-invalid" de bootstrap
-    if (direccion.value == "") { direccion.classList.add("is-invalid") }
-
-
-    if (ciudad.value == "") {
-      ciudad.classList.add("is-invalid")
-
-    }
-    if (codigoPostal.value == "") {
-      codigoPostal.classList.add("is-invalid")
-
-    }
-    if (pais.value == "00") {
-      pais.classList.add("is-invalid")
-
-    }
-
-  }
 
 }
 
@@ -290,19 +296,19 @@ function validatePaymentData() {//Valida los datos de forma de pago
     }
     else {//Si un campo se encuentra vacio, pregunta cúal es y le agrega la clase "is-invalid" de bootstrap
       if (nameCard.value == "") {
-        nameCard.classList.add("is-invalid")
+        nameCard.classList.add("is-invalid");
       }
       if (cardNumber.value == "") {
-        cardNumber.classList.add("is-invalid")
+        cardNumber.classList.add("is-invalid");
       }
       if (cvv.value == "") {
-        cvv.classList.add("is-invalid")
+        cvv.classList.add("is-invalid");
       }
       if (mesExp.value == "00") {
-        mesExp.classList.add("is-invalid")
+        mesExp.classList.add("is-invalid");
       }
       if (yearExp.value == "20") {
-        yearExp.classList.add("is-invalid")
+        yearExp.classList.add("is-invalid");
       }
     }
   }
