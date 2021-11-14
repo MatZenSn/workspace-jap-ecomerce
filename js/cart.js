@@ -79,7 +79,7 @@ function showCartProducts(array) {//for que recorre el array que nos viene del j
 function multiplicarPrecio() {//Multiplica cantidad por precio unitario
   for (let listaElement of listaImputs) {
     listaElement.addEventListener("change", (event) => {//evento change que está atento a cualquier cambio en esos inputs
-      if (event.target.value == 0) {//Si la cantidad de productos llega a 0 lanza un modal para preguntar si se quiere eliminar el producto del carrito
+      if (event.target.value <= 0  ) {//Si la cantidad de productos llega a 0 lanza un modal para preguntar si se quiere eliminar el producto del carrito
         $('#eliminarProduct').modal('show');
         document.getElementById("removeButton").setAttribute("data-iProduct", event.target.dataset.indice);//Setea el indice del produto que lanza el modal para poder identificar el producto
       }
@@ -92,16 +92,7 @@ function multiplicarPrecio() {//Multiplica cantidad por precio unitario
         calcularSubtotal();
         calcularPrecioDeEnvío();
         calcularTotal();
-      } {//evento change que está atento a cualquier cambio en esos inputs
-        let cantidad = parseFloat(event.target.value).toFixed(2);//se obtiene el valor del input desde donde se lanza el evento y redondea de ser necesario
-        let cost = parseFloat(event.target.dataset.unitcost).toFixed(2);//se obtiene el preio unitario agregado en data-unitcost y redondea de ser necesario
-        precioSubtotal = (cantidad * cost).toFixed(2);
-        document.getElementById(event.target.dataset.idsubtotal).innerHTML = precioSubtotal //idsubtotal se agrego como dato al input para tenerlo a la alcance a raiz del evento y no tener que estar agregandole id´s dinamicas a todos
-        cartProducts[event.target.dataset.indice].count = cantidad;
-        calcularSubtotal();
-        calcularPrecioDeEnvío();
-        calcularTotal();
-      }
+      } 
     })
 
   }
@@ -162,7 +153,7 @@ function removerItem() {//Remueve item del carrito
 
 function noRemoverItem() {//No remueve el item del carrito y vuelve a setearle una cantidad al producto
   let indice = document.getElementById("removeButton").dataset.iproduct;
-  cartProducts[indice].count++ //Le suma 1 a la cantidad de prductos, que para que se haya lanzado el modal, deberia ser cero.
+  cartProducts[indice].count = 1 //Le suma 1 a la cantidad de prductos, que para que se haya lanzado el modal, deberia ser cero.
   $('#eliminarProduct').modal('hide');//Cierra el modal
   showCartProducts(cartProducts);//Vuelve a mostrar el carrito y calcular todos los precios correspondientes
   multiplicarPrecio();
